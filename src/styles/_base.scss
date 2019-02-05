@@ -1,0 +1,61 @@
+$mainBackgroundColor: #437070;
+$containerColor:      #132020;
+$buttonColor: #264040;
+$buttonOnHover: #4d8080;
+$borderColor: #0a1010;
+$borderControlsColor: #4d8080;
+$buttonsBorderColor: #264040;
+$lightColor: #FFF8DC;
+$backgroundSections: #0a1010#252525;
+$onColor: #c4fb82;
+$clipDisplayColor: darken(#DCDCDC, 10%);
+$boxShadowColor: #888888;
+$clipScreenColor: #77abff;
+$volumeDisplayColor: #ffa333;
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border-radius: 5px;
+}
+
+body {
+    background: $mainBackgroundColor;
+    height: 100vh;
+    // display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header {
+    margin-bottom: 15px;
+    margin-top: 25px;
+    text-align: center;
+    color: $lightColor;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 90%;
+    margin: 0 auto 50px auto;
+    padding: 10px;
+    background-color: $containerColor;
+    border: 5px solid $lightColor;
+}
+
+@media only screen and (min-width: 610px) {
+header {
+    margin-bottom: 35px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 600px;
+    // margin: 0 auto 50px auto;
+    padding: 50px;
+}
+}

@@ -1,13 +1,109 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  border-radius: 5px; }
+
 body {
-  background: mistyrose; }
+  background: #437070;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
 
-textarea#editor {
-  margin: 5px auto 5px auto; }
+header {
+  margin-bottom: 35px;
+  text-align: center;
+  color: #FFF8DC; }
 
-div#preview {
-  margin: 5px auto 5px auto;
-  width: 30%;
-  height: 30%;
-  box-shadow: 13px 8px 14px 0px rgba(0, 0, 0, 0.99); }
+.container {
+  display: flex;
+  width: 600px;
+  margin: 0 auto 50px auto;
+  padding: 50px;
+  background-color: #132020;
+  border: 5px solid #FFF8DC; }
+
+div#drum-machine {
+  background-color: #0a1010 #252525;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #0a1010; }
+
+div#controls {
+  background-color: #0a1010 #252525;
+  width: 50%;
+  border: 2px solid #4d8080;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+
+div#volumeDisplay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+  color: black;
+  font-weight: bold;
+  font-family: DSEG14ClassicRegular;
+  width: 90%;
+  margin: 0 auto 15px auto;
+  height: 50px;
+  border-radius: 5px;
+  border: 2px solid #0a1010; }
+
+div#volumeDisplay p {
+  color: #ffa333;
+  opacity: 0;
+  transition: opacity 2s; }
+
+div#volumeDisplay p.isActive {
+  opacity: 1; }
+
+div#controlButtons {
+  display: flex; }
+
+div#power {
+  width: 50px;
+  border: 1px solid black;
+  margin: 5px auto 20px auto; }
+
+div#clipName {
+  font-weight: bold;
+  font-family: DSEG14ClassicRegular;
+  width: 90%;
+  margin: 15px auto 0 auto;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px; }
+
+.off {
+  color: red; }
+
+.on {
+  color: #c4fb82; }
+
+.clipScreenOn {
+  background-color: #77abff; }
+
+.clipScreenOff {
+  background-color: #c3c3c3; }
+
+button {
+  background-color: #264040;
+  color: #FFF8DC;
+  width: 50px;
+  height: 50px;
+  margin: 2px;
+  padding: 5px;
+  border-radius: 50%;
+  outline: none;
+  cursor: pointer; }
+
+button:hover {
+  background-color: #4d8080;
+  box-shadow: 0px 1px 8px 2px #888888; }
 
 /*# sourceMappingURL=styles.css.map */

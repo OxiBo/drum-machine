@@ -1,6 +1,8 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
 
 let config = {
     entry: [
@@ -10,12 +12,13 @@ let config = {
 
     output: {
         path: path.resolve(__dirname, './dist'),
-        filename: 'main.js'
+        filename: 'main.js',
+        // publicPath: '/'
     },
     devServer: {
         overlay: true
     },
-
+// use ?url=false to be able to load the background images
     module: {
         rules: [{
                 test: /\.js$/,
@@ -46,7 +49,8 @@ let config = {
             filename: 'index.html',
             template: './src/index.html'
         }),
-        new ExtractTextPlugin('styles.css')
+        new ExtractTextPlugin('styles.css'),
+        new CopyWebpackPlugin([{from: './src/sounds', to: 'sounds'}])
     ]
 
 }

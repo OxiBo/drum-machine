@@ -1,0 +1,121 @@
+div#controls {
+    background-color: $backgroundSections;
+    width: 100%;
+    border: 2px solid $borderControlsColor;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+div#volumeDisplay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: black;
+    font-weight: bold;
+    font-family: DSEG14ClassicRegular;
+    width: 60%;
+    margin: 10px auto 15px auto;
+    height: 50px;
+    border-radius: 5px;
+    border: 2px solid $borderColor;
+}
+
+
+div#volumeDisplay p {
+    color: $volumeDisplayColor;
+    opacity: 0;
+    transition: opacity 2s;
+}
+//transition to fade in the volume level
+div#volumeDisplay p.isActive {
+    opacity: 1;
+}
+
+div#controlButtons {
+    display: flex;
+    justify-content: center;
+}
+
+div#power {
+    width: 50px;
+    border: 1px solid black;
+    margin: 5px auto 20px auto;
+}
+
+div#display {
+    font-weight: bold;
+    font-family: DSEG14ClassicRegular;
+    width: 60%;
+    margin: 15px auto 10px auto;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+.off {
+    color: red;
+}
+
+.on {
+    color: $onColor;
+}
+
+.clipScreenOn {
+    background-color: $clipScreenColor;
+}
+
+.clipScreenOff {
+    background-color: $clipDisplayColor;
+}
+
+button {
+    background-color: $buttonColor;
+    color: $lightColor;
+    width: 50px;
+    height: 50px;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding: 5px;
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: $buttonOnHover;
+    box-shadow: 0px 1px 8px 2px $boxShadowColor;
+}
+
+
+@media only screen and (min-width: 610px) {
+
+    div#controls {
+        width: 50%;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+
+    div#volumeDisplay {
+        width: 90%;
+        margin: 0 auto 15px auto;
+    }
+
+div#display {
+    width: 90%;
+    margin: 15px auto 0 auto;
+}
+
+div#controlButtons {
+    display: flex;
+}
+
+button {
+    margin: 2px;
+}
+}

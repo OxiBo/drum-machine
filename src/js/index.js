@@ -1,9 +1,10 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MarkdownPreviewerApp from './components/MarkdownPreviewerApp';
 import 'normalize.css/normalize.css';
+
 import './../styles/styles.scss';
+import App from './components/App';
 
 
- ReactDOM.render(<MarkdownPreviewerApp />, document.getElementById("app"));
+ReactDOM.render(<App />, document.getElementById("app"));
+
