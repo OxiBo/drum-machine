@@ -172,61 +172,6 @@ export default class App extends React.Component {
         timerVolumeChange: null,
         sounds: bankOne,
         activeBank: null
-        // sounds: [{
-        //         keys: 'Q',
-        //         keyCode: 113,
-        //         name: 'boom',
-        //         src: 'boom.wav'
-        //     },
-        //     {
-        //         keys: 'W',
-        //         keyCode: 119,
-        //         name: 'clap',
-        //         src: 'clap.wav'
-        //     },
-        //     {
-        //         keys: 'E',
-        //         keyCode: 101,
-        //         name: 'hihat',
-        //         src: 'hihat.wav'
-        //     },
-        //     {
-        //         keys: 'A',
-        //         keyCode: 97,
-        //         name: 'kick',
-        //         src: 'kick.wav'
-        //     },
-        //     {
-        //         keys: 'S',
-        //         keyCode: 115,
-        //         name: 'openhat',
-        //         src: 'openhat.wav'
-        //     },
-        //     {
-        //         keys: 'D',
-        //         keyCode: 100,
-        //         name: 'ride',
-        //         src: 'ride.wav'
-        //     },
-        //     {
-        //         keys: 'Z',
-        //         keyCode: 122,
-        //         name: 'snare',
-        //         src: 'snare.wav'
-        //     },
-        //     {
-        //         keys: 'X',
-        //         keyCode: 120,
-        //         name: 'tink',
-        //         src: 'tink.wav'
-        //     },
-        //     {
-        //         keys: 'C',
-        //         keyCode: 99,
-        //         name: 'tom',
-        //         src: 'tom.wav'
-        //     }
-        // ]
     }
 
     // used this method to be able to use keyPress even on the drum pads
@@ -234,16 +179,26 @@ export default class App extends React.Component {
         this.handleKeyPress();
     }
 
+    // helper function to remove class from drum-pads
+    removeClass = () => {
+        const drumPadElements = document.querySelectorAll(".drum-pad");
+        drumPadElements.forEach(pad => pad.addEventListener('transitionend', function(e) {
+
+            if (e.propertyName !== "transform") return; // skip if it is not transform
+            this.classList.remove('playingPad')
+        }))
+    }
+
     handleKeyPress = () => {
         // work around to bind THIS to be able to use it to change the state onLeyPress in the event listener
-        const clip = this;
+        const thisComponent = this;
 
         window.addEventListener('keypress', function(e) {
             const keyName = e.key.toUpperCase();
             const pressed = document.getElementById(keyName);
 
-            if (pressed && clip.state.power) {
-                pressed.volume = clip.state.volume / 100;
+            if (pressed && thisComponent.state.power) {
+                pressed.volume = thisComponent.state.volume / 100;
 
                 // select pads which have class activePad to remove it before adding the class to the pad which was pressed
                 const activePad = document.querySelector('.activePad');
@@ -254,10 +209,14 @@ export default class App extends React.Component {
                 // select audio tag to play
                 const pad = document.getElementById(keyName).parentElement;
                 pad.classList.add('activePad');
-                pressed.currentTime = 0; // ?????
+                pressed.currentTime = 0; // rewind to the start
                 pressed.play();
-                clip.setState({ clipName: pressed.dataset.key });
-            }
+                thisComponent.setState({ clipName: pressed.dataset.key });
+
+                // scale a drum pad and add color  when playing and remove it
+                pressed.parentElement.classList.add('playingPad');
+                thisComponent.removeClass();
+            };
         })
     }
 
@@ -268,10 +227,15 @@ export default class App extends React.Component {
         //play the sound only if the power button is on
         if (this.state.power) {
             elt.volume = this.state.volume / 100;
+            elt.currentTime = 0; // rewind to the start
             elt.play();
             this.setState({
                 clipName: elt.dataset.key
             });
+
+            // scale a drum pad and add color  when playing and remove it
+            e.target.closest(".drum-pad").classList.add('playingPad');
+            this.removeClass();
         }
     }
 
@@ -302,22 +266,22 @@ export default class App extends React.Component {
         }
     }
 
-    handleVolume = (e) => {
-        const buttonType = e.target.id;
+    // handleVolume = (e) => {
+    //     const buttonType = e.target.id;
 
-        if (this.state.power) {
-            if (buttonType === 'volumeUp' && this.state.volume < 100) {
-                this.setState(prevState => ({
-                    volume: prevState.volume + 5
-                }));
+    //     if (this.state.power) {
+    //         if (buttonType === 'volumeUp' && this.state.volume < 100) {
+    //             this.setState(prevState => ({
+    //                 volume: prevState.volume + 1
+    //             }));
 
-            } else if (buttonType === 'volumeDown' && (this.state.volume > 0 && this.state.volume <= 100)) {
-                this.setState(prevState => ({
-                    volume: prevState.volume - 5
-                }))
-            }
-        }
-    }
+    //         } else if (buttonType === 'volumeDown' && (this.state.volume > 0 && this.state.volume <= 100)) {
+    //             this.setState(prevState => ({
+    //                 volume: prevState.volume - 1
+    //             }))
+    //         }
+    //     }
+    // }
 
     // function that makes it possible to change sound with mouseDown
     handleVolumeMouseDown = (e) => {
@@ -331,7 +295,7 @@ export default class App extends React.Component {
                                 volume: prevState.volume + 1
                             }))
                         }
-                    }, 200)
+                    }, 150)
                 }))
             } else if (buttonType === 'volumeDown' && this.state.volume <= 100) {
                 this.setState(() => ({
@@ -341,7 +305,7 @@ export default class App extends React.Component {
                                 volume: prevState.volume - 1
                             }))
                         }
-                    }, 200)
+                    }, 150)
                 }))
             }
         }
@@ -362,6 +326,7 @@ export default class App extends React.Component {
     selectBank = (e) => {
         const divClicked = e.target.id;
 
+        // helper function for adding active class
         const addActiveClass = () => {
             const activeBank = document.querySelector('.activeBank')
             if (activeBank) {
@@ -408,7 +373,7 @@ export default class App extends React.Component {
                         power={this.state.power}
                         handlePowerControl={this.handlePowerControl}
                         volume={this.state.volume}
-                        handleVolume={this.handleVolume}
+                        // handleVolume={this.handleVolume}
                         handleVolumeMouseDown={this.handleVolumeMouseDown}
                         handleVolumeMouseUp={this.handleVolumeMouseUp}
                         selectBank={this.selectBank}

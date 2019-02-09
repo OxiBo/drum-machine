@@ -7,7 +7,7 @@ const DisplayVolume = (props) => {
 
     return (
         <div className="controlSection" id='volumeDisplay'>
-         <p className={isActive}>{props.power ? `VOL : ${(props.volumeLevel * 100).toFixed() } %` : ''} </p>
+         <p className={isActive}>{props.power ? `VOL : ${props.volumeLevel} %` : ''} </p>
         </div>
         )
 }

@@ -4,7 +4,7 @@ const VolumeDown = (props) => {
 
     return (
         <div>
-            <button id='volumeDown' onClick={props.handleVolume} onMouseDown={props.handleVolumeMouseDown} onMouseUp={props.handleVolumeMouseUp}>
+            <button id='volumeDown' onMouseDown={props.handleVolumeMouseDown} onMouseUp={props.handleVolumeMouseUp}>
             Vol-
             </button>
         </div>
