@@ -1,4 +1,3 @@
-console.log("works")
 
 // helper function to remove class from drum-pads
     export const removeClass = (elementListened, propertyName, classToRemoveName) => {
