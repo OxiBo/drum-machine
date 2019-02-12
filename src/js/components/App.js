@@ -1,6 +1,7 @@
 import React from 'react';
 import DrumDisplay from './DrumDisplay';
 import Controls from './Controls';
+import { removeClass } from './../helpersFunc/helpers'
 
 const activeBank = document.querySelector('.activeBank');
 const bankOne = [{
@@ -107,6 +108,7 @@ const bankTwo = [{
     src: 'https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3'
 }];
 
+// i did not use this bank
 const bankThree = [{
         keys: 'Q',
         keyCode: 113,
@@ -179,15 +181,17 @@ export default class App extends React.Component {
         this.handleKeyPress();
     }
 
+    // moved to helpersFunc folder
     // helper function to remove class from drum-pads
-    removeClass = () => {
-        const drumPadElements = document.querySelectorAll(".drum-pad");
-        drumPadElements.forEach(pad => pad.addEventListener('transitionend', function(e) {
+    // removeClass = () => {
+    //     const drumPadElements = document.querySelectorAll(".drum-pad");
+    //     drumPadElements.forEach(pad => pad.addEventListener('transitionend', function(e) {
 
-            if (e.propertyName !== "transform") return; // skip if it is not transform
-            this.classList.remove('playingPad')
-        }))
-    }
+    //         if (e.propertyName !== "transform") return; // skip if it is not transform
+    //         this.classList.remove('playingPad')
+    //     }))
+    // }
+
 
     handleKeyPress = () => {
         // work around to bind THIS to be able to use it to change the state onLeyPress in the event listener
@@ -215,7 +219,8 @@ export default class App extends React.Component {
 
                 // scale a drum pad and add color  when playing and remove it
                 pressed.parentElement.classList.add('playingPad');
-                thisComponent.removeClass();
+                // thisComponent.removeClass();
+                removeClass(document.querySelectorAll(".drum-pad"), "transform", 'playingPad');
             };
         })
     }
@@ -235,7 +240,8 @@ export default class App extends React.Component {
 
             // scale a drum pad and add color  when playing and remove it
             e.target.closest(".drum-pad").classList.add('playingPad');
-            this.removeClass();
+            // this.removeClass();
+            removeClass(document.querySelectorAll(".drum-pad"), "transform", 'playingPad');
         }
     }
 
